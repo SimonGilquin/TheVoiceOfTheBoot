@@ -1,0 +1,39 @@
+﻿@model Website.Models.BootCampSession
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BootCampSession</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Speakers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Speakers)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Create", "Create", new { id = Model.Id }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
+  @Html.ActionLink("Add Comment", "Create", "Comments", new { sessionId = Model.Id }) 
+  
+
+</p>
