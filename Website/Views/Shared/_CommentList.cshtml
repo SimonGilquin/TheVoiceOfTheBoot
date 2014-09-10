@@ -40,9 +40,9 @@
       <td>
         @Html.DisplayFor(modelItem => item.CommentText)
       </td>
-      <td>
-        @Html.DisplayFor(modelItem => item.ImageUrl)
-      </td>
+        <td>
+            <img src="@item.ImageUrl"/>
+        </td>
     </tr>
   }
 
