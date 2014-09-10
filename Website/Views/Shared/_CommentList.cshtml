@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<Comment>
 
 <div class="">
-    @foreach (var item in Model)
-    {
+  @foreach (var item in Model)
+  {
         <div class="row">
             <div class="col-md-6 panel panel-primary">@Html.DisplayFor(modelItem => item.CommentText)</div>
         </div>
@@ -17,5 +17,5 @@
             <div class="col-md-2 panel panel-info">Speaker : @Html.DisplayFor(modelItem => item.SpeakerNote)</div>
             <div class="col-md-2 panel panel-info">Support : @Html.DisplayFor(modelItem => item.SupportNote)</div>
         </div>
-    }
+  }
 </div>

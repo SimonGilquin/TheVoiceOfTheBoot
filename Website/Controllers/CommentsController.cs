@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.WindowsAzure.Storage.Table;
 using Website.Models;
 
 namespace Website.Controllers
@@ -14,6 +17,11 @@ namespace Website.Controllers
     public class CommentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        private CloudBlobContainer blobContainer =
+            CloudStorageAccount.Parse(
+                "DefaultEndpointsProtocol=https;AccountName=tonii;AccountKey=rNvDjcL2wghkG0lcfhaoV/RMhDd0B+kZPPqIbq2/4HH5WcMLE+n/J0CTdVbrUwduHeverspAjB1CVlaTyCqpnA==")
+                .CreateCloudBlobClient().GetContainerReference("pictures");
 
         // GET: Comments
         public async Task<ActionResult> Index(int sessionId)
@@ -47,10 +55,22 @@ namespace Website.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,SessionId,Note,CommentText,ImageUrl")] Comment comment)
+        public async Task<ActionResult> Create([Bind(Include = "Id,SessionId,Note,CommentText")] Comment comment)
         {
             if (ModelState.IsValid)
             {
+                if (Request.Files.Count > 0)
+                {
+                    var picture = Request.Files["Picture"];
+                    if (picture != null)
+                    {
+                        var blob =
+                            blobContainer.GetBlockBlobReference(string.Format("Session-{0}/{1}", comment.SessionId,
+                                picture.FileName));
+                        await blob.UploadFromStreamAsync(picture.InputStream);
+                        comment.ImageUrl = blob.Uri.ToString();
+                    }
+                }
                 db.Comments.Add(comment);
                 db.SaveChanges();
                 return RedirectToAction("Details", "BootCampSessions", new { id = comment.SessionId });
