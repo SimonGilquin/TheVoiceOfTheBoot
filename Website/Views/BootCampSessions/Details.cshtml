@@ -31,7 +31,7 @@
   </dl>
 </div>
 <p>
-  @Html.ActionLink("Add Comment", "Create", "Comments", new { sessionId = Model.Id })
+  @Html.ActionLink("Add Comment", "Create", "Comments", new { sessionId = Model.Id }, new {})
 </p>
 @Html.Partial("_CommentList", Model.Comments)
 <p>
