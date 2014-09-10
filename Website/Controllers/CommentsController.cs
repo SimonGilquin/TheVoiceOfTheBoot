@@ -37,9 +37,9 @@ namespace Website.Controllers
         }
 
         // GET: Comments/Create
-        public ActionResult Create(BootCampSession session)
+        public ActionResult Create(int sessionId)
         {
-            return View();
+            return View(new Comment{SessionId = sessionId});
         }
 
         // POST: Comments/Create
@@ -53,7 +53,7 @@ namespace Website.Controllers
             {
                 db.Comments.Add(comment);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "BootCampSessions");
             }
 
             return View(comment);

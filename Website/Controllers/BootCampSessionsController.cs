@@ -37,9 +37,23 @@ namespace Website.Controllers
         }
 
         // GET: BootCampSessions/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create(int? bootcampId = null)
         {
-            return View();
+            if (bootcampId == null)
+            {
+                /* Get current Bootcamp */
+                var lastBootcamp =
+                    await db.Bootcamps.Where(b => b.Current).OrderByDescending(b => b.Date).FirstOrDefaultAsync();
+                if (lastBootcamp == null)
+                {
+                    lastBootcamp = new Bootcamp { Current = true, Date = DateTime.Now.Date, Title = string.Format("{0}'s Bootcamp", DateTime.Now.ToString("YYYY MMMM DD"))};
+                    db.Bootcamps.Add(lastBootcamp);
+                    await db.SaveChangesAsync();
+                }
+                bootcampId = lastBootcamp.Id;
+            }
+
+            return View(new BootCampSession { BootcampId = bootcampId.Value });
         }
 
 

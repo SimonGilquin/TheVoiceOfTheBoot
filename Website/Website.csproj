@@ -208,6 +208,10 @@
     <Compile Include="Migrations\201409101017018_InitialCreate.Designer.cs">
       <DependentUpon>201409101017018_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409101057440_ChangedReferencesId.cs" />
+    <Compile Include="Migrations\201409101057440_ChangedReferencesId.Designer.cs">
+      <DependentUpon>201409101057440_ChangedReferencesId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -292,6 +296,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201409101017018_InitialCreate.resx">
       <DependentUpon>201409101017018_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409101057440_ChangedReferencesId.resx">
+      <DependentUpon>201409101057440_ChangedReferencesId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -41,6 +42,7 @@ namespace Website.Models
     public class BootCampSession
     {
         public int Id { get; set; }
+        public int BootcampId { get; set; }
         public Bootcamp Bootcamp { get; set; }
         public string Hour { get; set; }
         public string Title { get; set; }
@@ -61,14 +63,17 @@ namespace Website.Models
     public class Comment
     {
         public int Id { get; set; }
+        public int SessionId { get; set; }
         public BootCampSession Session { get; set; }
+        [Range(0, 4)]
         public int SpeakerNote { get; set; }
+        [Range(0, 4)]
         public int SessionContentNote { get; set; }
+        [Range(0, 4)]
         public int SupportNote { get; set; }
         public string CommentText { get; set; }
         public string ImageUrl { get; set; }
 
         public string UserLogin { get; set; }
-
     }
 }
