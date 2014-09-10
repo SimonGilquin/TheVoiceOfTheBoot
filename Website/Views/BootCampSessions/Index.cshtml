@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Website.Models.BootCampSession>
+﻿@model IEnumerable<SessionSummary>
 
 @{
   ViewBag.Title = "Bootcamp Sessions";
@@ -7,48 +7,48 @@
 <h2>Bootcamp Sessions</h2>
 
 <p>
-    @Html.ActionLink("Add a session", "Create")
+  @Html.ActionLink("Add a session", "Create")
 </p>
 <table class="table">
-    <tr>
-       
-        <th>
-            @Html.DisplayNameFor(model => model.Hour)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Speakers)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th></th>
-    </tr>
+  <tr>
 
-@foreach (var item in Model) {
+    <th>
+      @Html.DisplayNameFor(model => model.BootCampSession.Hour)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.BootCampSession.Title)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.BootCampSession.Speakers)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.BootCampSession.Description)
+    </th>
+    <th>Comments</th>
+    <th></th>
+  </tr>
+
+  @foreach (var item in Model)
+  {
     <tr>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.Hour)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Speakers)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-          @Html.ActionLink("Add Comment", "Create", "Comments", new { sessionId = item.Id }, new { }) |
-          
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
+
+      <td>
+        @Html.DisplayFor(modelItem => item.BootCampSession.Hour)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.BootCampSession.Title)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.BootCampSession.Speakers)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.BootCampSession.Description)
+      </td>
+      <td>@Html.ActionLink(string.Format("{0}comments", item.CommentCount), "Details", "BootCampSessions", new { id = item.BootCampSession.Id }, new { })</td>
+      <td>
+        @Html.ActionLink("Add Comment", "Create", "Comments", new { sessionId = item.BootCampSession.Id }, new { })
+      </td>
     </tr>
-}
+  }
 
 </table>

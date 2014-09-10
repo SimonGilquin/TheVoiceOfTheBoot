@@ -18,7 +18,14 @@ namespace Website.Controllers
         // GET: BootCampSessions
         public async Task<ActionResult> Index()
         {
-            return View(await db.Sessions.ToListAsync());
+            return View(await db.Sessions.Select(s=>new SessionSummary
+            {
+                BootCampSession = s,
+                CommentCount = s.Comments.Count,
+                AverageSpeakerNote = s.Comments.Average(c => c.SpeakerNote),
+                AverageContentNote = s.Comments.Average(c => c.SessionContentNote),
+                AverageSupportNote = s.Comments.Average(c => c.SupportNote),
+            }).ToListAsync());
         }
 
         // GET: BootCampSessions/Details/5

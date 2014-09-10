@@ -198,6 +198,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BootcampsController.cs" />
     <Compile Include="Controllers\BootCampSessionsController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="Models\Bootcamp.cs" />
     <Compile Include="Models\BootCampSession.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\SessionSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="WebRole.cs" />
@@ -289,6 +291,7 @@
     <Content Include="Views\Comments\Edit.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
     <Content Include="Views\Shared\_CommentList.cshtml" />
+    <Content Include="Views\Bootcamps\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

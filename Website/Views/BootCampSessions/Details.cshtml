@@ -1,37 +1,37 @@
 ﻿@model Website.Models.BootCampSession
 
 @{
-    ViewBag.Title = "Details";
+  ViewBag.Title = "Details";
 }
 
 <h2>Details</h2>
 
 <div>
-    <h4>BootCampSession</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+  <h4>BootCampSession</h4>
+  <hr />
+  <dl class="dl-horizontal">
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+    <dt>
+      @Html.DisplayNameFor(model => model.Title)
+    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Speakers)
-        </dt>
+    <dd>
+      @Html.DisplayFor(model => model.Title)
+    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Speakers)
-        </dd>
+    <dt>
+      @Html.DisplayNameFor(model => model.Speakers)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.Speakers)
+    </dd>
 
 
-    </dl>
+  </dl>
 </div>
 <p>
-  @Html.ActionLink("Add Comment", "Create", "Comments", new { sessionId = Model.Id }) 
+  @Html.ActionLink("Add Comment", "Create", "Comments", new { sessionId = Model.Id })
 </p>
 @Html.Partial("_CommentList", Model.Comments)
 <p>
