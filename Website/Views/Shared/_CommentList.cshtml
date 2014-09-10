@@ -1,50 +1,21 @@
 ﻿@model IEnumerable<Comment>
-<table class="table">
-  <tr>
-    <th>
-      @Html.DisplayNameFor(model => model.SessionId)
-    </th>
-    <th>
-      @Html.DisplayNameFor(model => model.SessionContentNote)
-    </th>
-    <th>
-      @Html.DisplayNameFor(model => model.SpeakerNote)
-    </th>
-    <th>
-      @Html.DisplayNameFor(model => model.SupportNote)
-    </th>
-    <th>
-      @Html.DisplayNameFor(model => model.CommentText)
-    </th>
-    <th>
-      @Html.DisplayNameFor(model => model.ImageUrl)
-    </th>
-    <th></th>
-  </tr>
 
-  @foreach (var item in Model)
-  {
-    <tr>
-      <td>
-        @Html.DisplayFor(modelItem => item.SessionId)
-      </td>
-      <td>
-        @Html.DisplayFor(modelItem => item.SessionContentNote)
-      </td>
-      <td>
-        @Html.DisplayFor(modelItem => item.SpeakerNote)
-      </td>
-      <td>
-        @Html.DisplayFor(modelItem => item.SupportNote)
-      </td>
-      <td>
-        @Html.DisplayFor(modelItem => item.CommentText)
-      </td>
-      <td>
-        @Html.DisplayFor(modelItem => item.ImageUrl)
-      </td>
-    </tr>
-  }
-
-</table>
-
+<div class="">
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="col-md-6 panel panel-primary">@Html.DisplayFor(modelItem => item.CommentText)</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 panel panel-body">@Html.DisplayFor(modelItem => item.ImageUrl)</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 panel panel-heading text-center">Notes</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 panel panel-info">Contenu : @Html.DisplayFor(modelItem => item.SessionContentNote)</div>
+            <div class="col-md-2 panel panel-info">Speaker : @Html.DisplayFor(modelItem => item.SpeakerNote)</div>
+            <div class="col-md-2 panel panel-info">Support : @Html.DisplayFor(modelItem => item.SupportNote)</div>
+        </div>
+    }
+</div>
