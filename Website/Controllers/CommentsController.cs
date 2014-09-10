@@ -16,9 +16,9 @@ namespace Website.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Comments
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int sessionId)
         {
-            return View(await db.Comments.ToListAsync());
+            return View(await db.Comments.Where(w => w.SessionId == sessionId).ToListAsync());
         }
 
         // GET: Comments/Details/5
@@ -39,7 +39,7 @@ namespace Website.Controllers
         // GET: Comments/Create
         public ActionResult Create(int sessionId)
         {
-            return View(new Comment{SessionId = sessionId});
+            return View(new Comment { SessionId = sessionId });
         }
 
         // POST: Comments/Create
@@ -52,8 +52,8 @@ namespace Website.Controllers
             if (ModelState.IsValid)
             {
                 db.Comments.Add(comment);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index", "BootCampSessions");
+                db.SaveChanges();
+                return RedirectToAction("Details", "BootCampSessions", new { id = comment.SessionId });
             }
 
             return View(comment);

@@ -28,7 +28,7 @@ namespace Website.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BootCampSession bootCampSession = await db.Sessions.FindAsync(id);
+            BootCampSession bootCampSession = await db.Sessions.Include(s => s.Comments).SingleOrDefaultAsync(s => s.Id == id);
             if (bootCampSession == null)
             {
                 return HttpNotFound();
@@ -46,7 +46,7 @@ namespace Website.Controllers
                     await db.Bootcamps.Where(b => b.Current).OrderByDescending(b => b.Date).FirstOrDefaultAsync();
                 if (lastBootcamp == null)
                 {
-                    lastBootcamp = new Bootcamp { Current = true, Date = DateTime.Now.Date, Title = string.Format("{0}'s Bootcamp", DateTime.Now.ToString("YYYY MMMM DD"))};
+                    lastBootcamp = new Bootcamp { Current = true, Date = DateTime.Now.Date, Title = string.Format("{0}'s Bootcamp", DateTime.Now.ToString("YYYY MMMM DD")) };
                     db.Bootcamps.Add(lastBootcamp);
                     await db.SaveChangesAsync();
                 }
