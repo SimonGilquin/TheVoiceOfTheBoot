@@ -73,7 +73,7 @@ namespace Website.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,BootcampId,Hour,Title,Speakers,Description")] BootCampSession bootCampSession)
+        public async Task<ActionResult> Create([Bind(Include = "Id,BootcampId,StartTime,Title,Speakers,Description")] BootCampSession bootCampSession)
         {
             if (ModelState.IsValid)
             {
@@ -105,7 +105,7 @@ namespace Website.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,BootcampId,Hour,Title,Speakers,Description")] BootCampSession bootCampSession)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,BootcampId,StartTime,Title,Speakers,Description")] BootCampSession bootCampSession)
         {
             if (ModelState.IsValid)
             {
