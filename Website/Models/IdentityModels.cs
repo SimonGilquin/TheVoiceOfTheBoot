@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -27,7 +29,7 @@ namespace Website.Models
         }
 
         public DbSet<Bootcamp> Bootcamps { get; set; }
-        public DbSet<Session> Sessions { get; set; }
+        public DbSet<BootCampSession> Sessions { get; set; }
         public DbSet<Comment> Comments { get; set; }
 
         public static ApplicationDbContext Create()
@@ -36,15 +38,15 @@ namespace Website.Models
         }
     }
 
-    public class Session
+    public class BootCampSession
     {
         public int Id { get; set; }
-        public int BootcampId { get; set; }
-        public DateTime Hour { get; set; }
+        public Bootcamp Bootcamp { get; set; }
+        public string Hour { get; set; }
         public string Title { get; set; }
         public string Speakers { get; set; }
         public string Description { get; set; }
-
+        public ICollection<Comment> Comments { get; set; }
     }
 
     public class Bootcamp
@@ -53,15 +55,20 @@ namespace Website.Models
         public DateTime Date { get; set; }
         public string Title { get; set; }
         public bool Current { get; set; }
-
+        public ICollection<BootCampSession> Sessions { get; set; }
     }
 
     public class Comment
     {
         public int Id { get; set; }
-        public int SessionId { get; set; }
-        public int Note { get; set; }
+        public BootCampSession Session { get; set; }
+        public int SpeakerNote { get; set; }
+        public int SessionContentNote { get; set; }
+        public int SupportNote { get; set; }
         public string CommentText { get; set; }
         public string ImageUrl { get; set; }
+
+        public string UserLogin { get; set; }
+
     }
 }
