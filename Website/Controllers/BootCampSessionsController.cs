@@ -16,9 +16,16 @@ namespace Website.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: BootCampSessions
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? bootcampId)
         {
-            return View(await db.Sessions.Select(s=>new SessionSummary
+/*
+            if (bootcampId == null)
+            {
+                currentBootcamp = db.GetCurrentBootcampAsync();
+                if ()
+            }
+*/
+            return View(await db.Sessions.Select(s => new SessionSummary
             {
                 BootCampSession = s,
                 CommentCount = s.Comments.Count,
@@ -49,13 +56,10 @@ namespace Website.Controllers
             if (bootcampId == null)
             {
                 /* Get current Bootcamp */
-                var lastBootcamp =
-                    await db.Bootcamps.Where(b => b.Current).OrderByDescending(b => b.Date).FirstOrDefaultAsync();
+                var lastBootcamp = await db.GetCurrentBootcampAsync();
                 if (lastBootcamp == null)
                 {
-                    lastBootcamp = new Bootcamp { Current = true, Date = DateTime.Now.Date, Title = string.Format("{0}'s Bootcamp", DateTime.Now.ToString("YYYY MMMM DD")) };
-                    db.Bootcamps.Add(lastBootcamp);
-                    await db.SaveChangesAsync();
+                    return RedirectToAction("Create", "Bootcamps");
                 }
                 bootcampId = lastBootcamp.Id;
             }

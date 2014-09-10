@@ -7,7 +7,11 @@
 <h2>Bootcamp Sessions</h2>
 
 <p>
-  @Html.ActionLink("Add a session", "Create")
+  @Html.ActionLink("Add a session", "Create") |
+  @using (Html.BeginForm("Close", "Bootcamps"))
+  {
+    <input type="submit" value="Close Bootcamp" />
+  }
 </p>
 <table class="table">
   <tr>
