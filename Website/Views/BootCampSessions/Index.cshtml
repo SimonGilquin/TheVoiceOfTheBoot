@@ -24,7 +24,18 @@
     <th>
       @Html.DisplayNameFor(model => model.BootCampSession.Description)
     </th>
-    <th>Comments</th>
+    <th>
+      @Html.DisplayNameFor(model => model.CommentCount)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.AverageContentNote)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.AverageSupportNote)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.AverageSpeakerNote)
+    </th>
     <th></th>
   </tr>
 
@@ -44,7 +55,10 @@
       <td>
         @Html.DisplayFor(modelItem => item.BootCampSession.Description)
       </td>
-      <td>@Html.ActionLink(string.Format("{0}comments", item.CommentCount), "Details", "BootCampSessions", new { id = item.BootCampSession.Id }, new { })</td>
+      <td>@Html.ActionLink(string.Format("{0} comments", item.CommentCount), "Details", "BootCampSessions", new { id = item.BootCampSession.Id }, new { })</td>
+      <td>@item.AverageContentNote</td>
+      <td>@item.AverageSupportNote</td>
+      <td>@item.AverageSpeakerNote</td>
       <td>
         @Html.ActionLink("Add Comment", "Create", "Comments", new { sessionId = item.BootCampSession.Id }, new { })
       </td>
